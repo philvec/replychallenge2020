@@ -40,7 +40,7 @@ class Loader():
                 skills = []
 
                 for i in range(numberOfSkills):
-                    skills.append(developer[2 + i])
+                    skills.append(developer[3 + i])
 
                 developers.append(Worker('D', potentialBonus, skills))
 
@@ -57,5 +57,6 @@ class Loader():
 
                 projectManagers.append(Worker('P', potentialBonus))
 
+        print(seats)
         return (seats, developers + projectManagers)
         pass
