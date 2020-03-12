@@ -57,6 +57,10 @@ class Loader():
 
                 projectManagers.append(Worker('P', potentialBonus))
 
+<<<<<<< HEAD
         print(seats)
         return (seats, developers + projectManagers)
         pass
+=======
+        return (seats, developers + projectManagers)
+>>>>>>> d53e0b1fd55b4a58d20514a20a393db0694039fb
