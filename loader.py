@@ -13,7 +13,7 @@ class Loader():
         developers = []
         projectManagers = []
 
-        with open(filepaths[0]) as fp:
+        with open(file) as fp:
             ### MAP PARSING ###
             firstLine = fp.readline()
             width, height = firstLine.split()
