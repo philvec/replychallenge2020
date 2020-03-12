@@ -11,9 +11,7 @@ if __name__ == '__main__':
     for file in filepaths:
         print('processing file ', file)
         seats, workers = loader.load(file)
-        print(seats)
-        print(workers)
-        exit(0)
+
         best_friends = []
         for i, worker in enumerate(workers):
             print('\r    calculating friends for worker ', i + 1, '/', len(workers), end='')
