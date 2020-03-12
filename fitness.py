@@ -10,7 +10,9 @@ def best_worker_for_seat(seat, workers):
 
 
 def fitness_w_w(worker1, worker2):
-    return 1
+    wp = 0
+    bp = 0
+    return wp + bp
 
 def fitness_s_w(seat, worker):
     return 1
