@@ -41,6 +41,5 @@ def fitness_s_w(seat, worker, workers_friends):
             fitness += workers_friends[friends_counter][1]
         friends_counter += 1
 
-    print(fitness)
     return fitness
 
