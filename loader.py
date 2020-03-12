@@ -58,4 +58,3 @@ class Loader():
                 projectManagers.append(Worker('P', potentialBonus))
 
         return (seats, developers + projectManagers)
-        pass
