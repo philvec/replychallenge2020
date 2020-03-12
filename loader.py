@@ -94,7 +94,7 @@ class Loader():
                 for i in range(numberOfSkills):
                     skills.append(developer[3 + i])
 
-                developers.append(Worker(company, 'D', potentialBonus, skills, dev))
+                developers.append(Worker(company, '_', potentialBonus, skills, dev))
 
             ### PM PARSING ###
             line = fp.readline()
@@ -107,7 +107,7 @@ class Loader():
                 company = PM[0]
                 potentialBonus = int(PM[1])
 
-                projectManagers.append(Worker(company, 'P', potentialBonus, id=(numberOfDevs + PMnumber)))
+                projectManagers.append(Worker(company, 'M', potentialBonus, id=(numberOfDevs + PMnumber)))
 
         return (seats, developers + projectManagers)
         pass

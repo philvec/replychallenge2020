@@ -25,3 +25,10 @@ if __name__ == '__main__':
         save(workers, best_workers, 'outputs/result_'+file.split('/')[-1])
         print('\r    Saved!')
 
+        for w, f in best_friends:
+            print(w.id, [(a.id, b) for (a, b) in f])
+        print()
+        for s, f in best_workers:
+            print(s.x, s.y, [(a.id, b) for (a, b) in f])
+        exit(0)
+
