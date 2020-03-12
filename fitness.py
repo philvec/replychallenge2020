@@ -3,16 +3,14 @@ def best_friend_for_worker(worker, best_friends):
     # result = [(friend, fitness), ...]
     result = []
     for friend in best_friends:
-        result.append((friend, 1.0))
-    return result
+        result.append((friend, fitness_w_w(worker, friend)))
+    return reversed(sorted(result, key=lambda x: x[1]))
 
 def best_worker_for_seat(seat, best_friends):
-    # result = [(worker, fitness), ...]
     result = []
     for worker, friends in best_friends:
-        result.append((worker, 1.0))
-    return result
-
+        result.append((worker, fitness_s_w(seat, worker, friends)))
+    return reversed(sorted(result, key=lambda x: x[1]))
 
 
 def fitness_w_w(worker1, worker2):
@@ -24,5 +22,5 @@ def fitness_w_w(worker1, worker2):
 
     return wp + bp
 
-def fitness_s_w(seat, worker):
+def fitness_s_w(seat, worker, best_friends):
     return 1
