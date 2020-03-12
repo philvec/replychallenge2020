@@ -30,5 +30,4 @@ if __name__ == '__main__':
         print()
         for s, f in best_workers:
             print(s.x, s.y, [(a.id, b) for (a, b) in f])
-        exit(0)
 

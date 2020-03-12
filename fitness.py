@@ -9,6 +9,8 @@ def best_friend_for_worker(worker, best_friends):
 
 def best_worker_for_seat(seat, best_friends):
     result = []
+    if seat.type == "#":
+        return []
     for worker, friends in best_friends:
         result.append((worker, fitness_s_w(seat, worker, friends)))
     return list(reversed(sorted(result, key=lambda x: x[1])))
