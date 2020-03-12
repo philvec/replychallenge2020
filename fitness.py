@@ -1,11 +1,17 @@
 
-def best_friend_for_worker(worker, friends):
+def best_friend_for_worker(worker, best_friends):
     # result = [(friend, fitness), ...]
-    return []
+    result = []
+    for friend in best_friends:
+        result.append((friend, 1.0))
+    return result
 
-def best_worker_for_seat(seat, workers):
+def best_worker_for_seat(seat, best_friends):
     # result = [(worker, fitness), ...]
-    return []
+    result = []
+    for worker, friends in best_friends:
+        result.append((worker, 1.0))
+    return result
 
 
 
