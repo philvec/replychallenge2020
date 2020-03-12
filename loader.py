@@ -1,58 +1,59 @@
 from data.seat import *
 from data.worker import *
 
+
+def translateIndex2Dto1D(i, j):
+    return (i+1) * j
+
+def loadAdjacent(seatsList, height, width):
+    for h in range(height):
+        for w in range(width):
+            seatsListIndex = translateIndex2Dto1D(h, w)
+            adjacentSeats = []    
+            if(h == 0):
+                bottomAdjacent = seatsList[translateIndex2Dto1D(h+1, w)].type
+                if(w == 0):
+                    rightAdjacent = seatsList[translateIndex2Dto1D(h, w+1)].type
+                    seatsList[seatsListIndex].adjacent_seats = ['#', '#', rightAdjacent, bottomAdjacent]
+                elif(w == width-1):
+                    leftAdjacent = seatsList[translateIndex2Dto1D(h, w-1)].type
+                    seatsList[seatsListIndex].adjacent_seats = [leftAdjacent, '#', '#', bottomAdjacent]
+                else:
+                    rightAdjacent = seatsList[translateIndex2Dto1D(h, w+1)].type
+                    leftAdjacent = seatsList[translateIndex2Dto1D(h, w-1)].type
+                    seatsList[seatsListIndex].adjacent_seats = [leftAdjacent, '#', rightAdjacent, bottomAdjacent]
+            elif(h == height-1):
+                topAdjacent = seatsList[translateIndex2Dto1D(h-1, w)].type
+                if(h == height-1 and w == 0):
+                    rightAdjacent = seatsList[translateIndex2Dto1D(h, w+1)].type
+                    seatsList[seatsListIndex].adjacent_seats = ['#', topAdjacent, rightAdjacent, '#']
+                elif(h == height - 1 and w == width - 1):
+                    leftAdjacent = seatsList[translateIndex2Dto1D(h, w-1)].type
+                    seatsList[seatsListIndex].adjacent_seats = [leftAdjacent, topAdjacent, '#', '#']
+                else:
+                    rightAdjacent = seatsList[translateIndex2Dto1D(h, w+1)].type
+                    leftAdjacent = seatsList[translateIndex2Dto1D(h, w-1)].type
+                    seatsList[seatsListIndex].adjacent_seats = [leftAdjacent, topAdjacent, rightAdjacent, '#']
+            elif(w==0):
+                topAdjacent = seatsList[translateIndex2Dto1D(h-1, w)].type
+                rightAdjacent = seatsList[translateIndex2Dto1D(h, w+1)].type
+                bottomAdjacent = seatsList[translateIndex2Dto1D(h+1, w)].type
+                seatsList[seatsListIndex].adjacent_seats = ['#', topAdjacent, rightAdjacent, bottomAdjacent]
+            elif(w == width-1):
+                leftAdjacent = seatsList[translateIndex2Dto1D(h, w-1)].type
+                topAdjacent = seatsList[translateIndex2Dto1D(h-1, w)].type
+                bottomAdjacent = seatsList[translateIndex2Dto1D(h+1, w)].type
+                seatsList[seatsListIndex].adjacent_seats = [leftAdjacent, topAdjacent, '#', bottomAdjacent]
+            else:
+                leftAdjacent = seatsList[translateIndex2Dto1D(h, w-1)].type
+                topAdjacent = seatsList[translateIndex2Dto1D(h-1, w)].type
+                rightAdjacent = seatsList[translateIndex2Dto1D(h, w+1)].type
+                bottomAdjacent = seatsList[translateIndex2Dto1D(h+1, w)].type
+                seatsList[seatsListIndex].adjacent_seats = [leftAdjacent, topAdjacent, rightAdjacent, bottomAdjacent]
 class Loader():
     def __init__(self):
         pass
 
-    def translateIndex2Dto1D(i, j):
-        return (i+1) * j
-
-    def loadAdjacent(self, seatList, height, width):
-        for h in range(height):
-            for w in range(width):
-                seatListIndex = translateIndex2Dto1D(h, w)
-                adjacentSeats = []    
-                if(h == 0):
-                    bottomAdjacent = seatList[translateIndex2Dto1D(h+1, w)].type
-                    if(w == 0):
-                        rightAdjacent = seatList[translateIndex2Dto1D(h, w+1)].type
-                        seatsList[seatListIndex].adjacent_seats = ['#', '#', rightAdjacent, bottomAdjacent]
-                    elif(w == width-1):
-                        leftAdjacent = seatList[translateIndex2Dto1D(h, w-1)].type
-                        seatsList[seatListIndex].adjacent_seats = [leftAdjacent, '#', '#', bottomAdjacent]
-                    else:
-                        rightAdjacent = seatList[translateIndex2Dto1D(h, w+1)].type
-                        leftAdjacent = seatList[translateIndex2Dto1D(h, w-1)].type
-                        seatsList[seatListIndex].adjacent_seats = [leftAdjacent, '#', rightAdjacent, bottomAdjacent]
-                elif(h == height-1):
-                    topAdjacent = seatList[translateIndex2Dto1D(h-1, w)].type
-                    if(h == height-1 and w == 0):
-                        rightAdjacent = seatList[translateIndex2Dto1D(h, w+1)].type
-                        seatsList[seatListIndex].adjacent_seats = ['#', topAdjacent, rightAdjacent, '#']
-                    elif(h == height - 1 and w == width - 1):
-                        leftAdjacent = seatList[translateIndex2Dto1D(h, w-1)].type
-                        seatsList[seatListIndex].adjacent_seats = [leftAdjacent, topAdjacent, '#', '#']
-                    else:
-                        rightAdjacent = seatList[translateIndex2Dto1D(h, w+1)].type
-                        leftAdjacent = seatList[translateIndex2Dto1D(h, w-1)].type
-                        seatsList[seatListIndex].adjacent_seats = [leftAdjacent, topAdjacent, rightAdjacent, '#']
-                elif(w==0):
-                    topAdjacent = seatList[translateIndex2Dto1D(h-1, w)].type
-                    rightAdjacent = seatList[translateIndex2Dto1D(h, w+1)].type
-                    bottomAdjacent = seatList[translateIndex2Dto1D(h+1, w)].type
-                    seatsList[seatListIndex].adjacent_seats = ['#', topAdjacent, rightAdjacent, bottomAdjacent]
-                elif(w == width-1):
-                    leftAdjacent = seatList[translateIndex2Dto1D(h, w-1)].type
-                    topAdjacent = seatList[translateIndex2Dto1D(h-1, w)].type
-                    bottomAdjacent = seatList[translateIndex2Dto1D(h+1, w)].type
-                    seatsList[seatListIndex].adjacent_seats = [leftAdjacent, topAdjacent, '#', bottomAdjacent]
-                else:
-                    leftAdjacent = seatList[translateIndex2Dto1D(h, w-1)].type
-                    topAdjacent = seatList[translateIndex2Dto1D(h-1, w)].type
-                    rightAdjacent = seatList[translateIndex2Dto1D(h, w+1)].type
-                    bottomAdjacent = seatList[translateIndex2Dto1D(h+1, w)].type
-                    seatsList[seatListIndex].adjacent_seats = [leftAdjacent, topAdjacent, rightAdjacent, bottomAdjacent]
 
     def load(self, file):
         # seats = []   <- list of Seat
@@ -75,7 +76,7 @@ class Loader():
                 for w in range(width):
                     seats.append(Seat(w, h, mapLine[w]))
             
-            loadAdjacent(seats, width, height)
+            loadAdjacent(seatsList=seats, height=height, width=width)
             
             ### DEVELOPER PARSING ###
             line = fp.readline()
