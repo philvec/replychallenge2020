@@ -1,7 +1,4 @@
-
-if __name__ == '__main__':
-    print('hello')
-
+from data.seat import *
 
 filepaths = ['data/a_solar.txt', 'data/b_dream.txt', 'data/c_soup.txt', 'data/d_maelstrom.txt', 'data/e_igloos.txt', 'data/f_glitch.txt']
 
@@ -17,6 +14,6 @@ with open(filepaths[0]) as fp:
         mapLine = list(fp.readline())
         
         for w in range(width):
-            map[h].append(mapLine[w])
+            map[h].append(Seat(w, h, mapLine[w]))
     
     print(map)
