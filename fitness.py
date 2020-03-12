@@ -4,13 +4,13 @@ def best_friend_for_worker(worker, best_friends):
     result = []
     for friend in best_friends:
         result.append((friend, fitness_w_w(worker, friend)))
-    return reversed(sorted(result, key=lambda x: x[1]))
+    return list(reversed(sorted(result, key=lambda x: x[1])))
 
 def best_worker_for_seat(seat, best_friends):
     result = []
     for worker, friends in best_friends:
         result.append((worker, fitness_s_w(seat, worker, friends)))
-    return reversed(sorted(result, key=lambda x: x[1]))
+    return list(reversed(sorted(result, key=lambda x: x[1])))
 
 
 def fitness_w_w(worker1, worker2):
@@ -30,16 +30,17 @@ def fitness_s_w(seat, worker, workers_friends):
     number_of_developers = seat.adjacent_seats.count('_')
     number_of_project_managers = seat.adjacent_seats.count('M')
 
-    while project_managers_counter != number_of_project_managers:
-        if workers_friends[friends_counter][0].type == 'P':
+    while project_managers_counter != number_of_project_managers and friends_counter < len(workers_friends):
+        if workers_friends[friends_counter][0].role == 'P':
             fitness += workers_friends[friends_counter][1]
         friends_counter += 1
 
     friends_counter = 0
-    while developers_counter != number_of_developers:
-        if workers_friends[friends_counter][0].type == 'D':
+    while developers_counter != number_of_developers and friends_counter < len(workers_friends):
+        if workers_friends[friends_counter][0].role == 'D':
             fitness += workers_friends[friends_counter][1]
         friends_counter += 1
 
+    print(fitness)
     return fitness
 
