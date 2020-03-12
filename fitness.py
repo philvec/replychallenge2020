@@ -22,5 +22,24 @@ def fitness_w_w(worker1, worker2):
 
     return wp + bp
 
-def fitness_s_w(seat, worker, best_friends):
-    return 1
+def fitness_s_w(seat, worker, workers_friends):
+    fitness = 0
+    developers_counter = 0
+    project_managers_counter = 0
+    friends_counter = 0
+    number_of_developers = seat.adjacent_seats.count('_')
+    number_of_project_managers = seat.adjacent_seats.count('M')
+
+    while project_managers_counter != number_of_project_managers:
+        if workers_friends[friends_counter][0].type == 'P':
+            fitness += workers_friends[friends_counter][1]
+        friends_counter += 1
+
+    friends_counter = 0
+    while developers_counter != number_of_developers:
+        if workers_friends[friends_counter][0].type == 'D':
+            fitness += workers_friends[friends_counter][1]
+        friends_counter += 1
+
+    return fitness
+
