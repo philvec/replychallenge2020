@@ -1,16 +1,19 @@
 from loader import Loader
 from fitness import best_friend_for_worker, best_worker_for_seat
 from saver import save
+from evaluate import score
 
 
 filepaths = ['data/a_solar.txt', 'data/b_dream.txt', 'data/c_soup.txt', 'data/d_maelstrom.txt', 'data/e_igloos.txt', 'data/f_glitch.txt']
+sizes = [(5, 3), (100, 100), (200, 200), (300, 200), (500, 400), (500, 400)]
 
 if __name__ == '__main__':
     loader = Loader()
 
-    for file in filepaths:
+    for fi, file in enumerate(filepaths):
         print('processing file ', file)
         seats, workers = loader.load(file)
+        seats = [seat for seat in seats if seat.type != "#"]
 
         best_friends = []
         for i, worker in enumerate(workers):
@@ -22,12 +25,10 @@ if __name__ == '__main__':
             best_workers.append((seat, best_worker_for_seat(seat, best_friends)))
         print('\r    Done kmining! Reorganising output...', end='')
 
-        save(workers, best_workers, 'outputs/result_'+file.split('/')[-1])
-        print('\r    Saved!')
+        best_workers = list(reversed(sorted(best_workers, key=lambda x: x[1][0][1])))
 
-        for w, f in best_friends:
-            print(w.id, [(a.id, b) for (a, b) in f])
-        print()
-        for s, f in best_workers:
-            print(s.x, s.y, [(a.id, b) for (a, b) in f])
+        output_dict = save(workers, best_workers, 'outputs/result_'+file.split('/')[-1])
+        print('\r    Saved! score: ', end='')
+        score = score(sizes[fi], output_dict, {worker.id: worker for worker in workers})
+        print(score)
 
